@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+
+.contact_page {
+    margin-top: 50px;
+    display         : flex;
+    margin-left     : 100px;
+    margin-right    : 100px;
+    color           : white;
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 70vh;
+}
+
+.contact_col_left {
+    width           : 50%;
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/phone_booth_walking_in.jpg?alt=media&token=984527b4-04a8-4ac9-b098-95f2e8e2b4df');
+    background-size : cover;
+}
+
+.contact_col_right {
+    width    : 50%;
+    flex-grow: 1;
+}
+
+.contact-content {
+    margin-left: 100px;
+    margin-top: 30px;
+}
+
+.get-in-touch {
+    font-size: 30px;
+    font-family: "Shippori Mincho B1", serif;
+}
+
+.contact_info {
+    margin-top : 30px;
+    font       : normal normal normal 16px/1.4em avenir-lt-w01_35-light1475496, sans-serif;
+    line-height: 1.4em;
+    color      : white;
+}
+
+
+/* Style inputs */
+
+input[type=text],
+#email,
+#subject,
+#message {
+    width           : 100%;
+    padding         : 12px 20px;
+    margin          : 8px 0;
+    display         : inline-block;
+    border          : 1px solid #ccc;
+    border-radius   : 4px;
+    box-sizing      : border-box;
+    background-color: rgba(51, 51, 51, 0.1);
+    color           : white;
+}
+
+
+/* Style the submit button */
+
+input[type=submit] {
+    background-color: #b9b9b9;
+    color           : white;
+    padding         : 14px 20px;
+    margin          : 8px 0;
+    border          : none;
+    border-radius   : 4px;
+    cursor          : pointer;
+}
+
+#message {
+    width : 100%;
+    height: 100px;
+}
+
+form {
+    margin      : auto;
+    display     : block;
+    margin-left : auto;
+    margin-right: auto;
+}
+
+.contact_form {
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+.submit_button {
+    display         : inline-block;
+    padding         : 0.35em 1.2em;
+    border          : 0.1em solid #FFFFFF;
+    margin          : 0 0.3em 0.3em 0;
+    border-radius   : 0.12em;
+    box-sizing      : border-box;
+    text-decoration : none;
+    font-family     : 'Roboto', sans-serif;
+    font-weight     : 300;
+    color           : #FFFFFF;
+    text-align      : center;
+    transition      : all 0.2s;
+    background-color: black;
+}
+
+.submit_button:hover {
+    color           : #f5f5f5;
+    background-color: #696767;
+}
+
+@media all and (max-width:30em) {
+    .submit_button {
+        display: block;
+        margin : 0.4em auto;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .get-in-touch{
+        font-size: 30px;
+    }
+
+    .contact-content {
+        margin: 10px;
+    }
+
+    .contact_form_actual {
+        width: 100%;
+    }
+
+    .contact_page {
+        display     : block;
+        margin-left : 100px;
+        margin-right: 100px;
+    }
+
+    .contact_col_right {
+        width        : 100%;
+        border-radius: 25px;
+    }
+
+    .contact_info {
+        margin-top   : 30px;
+        margin-bottom: 30px;
+    }
+
+    .contact_form {
+        margin: 15px;
+    }
+
+    .contact_page {
+        margin-left : 20px;
+        margin-right: 20px;
+    }
+
+    .contact_info {
+        font-size: 15px;
+    }
+
+    input {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .get-in-touch {
+        font-size: 30px;
+    }
+
+    input {
+        width: 100%;
+    }
+}

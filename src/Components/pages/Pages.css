@@ -1,0 +1,164 @@
+.modal-class {
+  width     : 80%;
+  height    : auto;
+  margin    : 0 auto;
+  /* padding: 10px; */
+  position  : relative;
+}
+
+#dynamic-modal {
+  /* width: 90%;
+  max-height: 90%; */
+  /* margin-top: 5%; */
+  /* position:absolute; */
+  transform       : translate(-50%, -50%);
+  position        : fixed;
+  top             : 50%;
+  left            : 50%;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-img {
+  /* transform: translate(-50%, -50%); */
+  /* position: fixed; */
+  /* top: 50%; */
+  animation : zoominoutsinglefeatured 0.2s 1;
+  margin    : 0 auto;
+  padding   : 2%;
+  display   : block;
+  max-width : 1080px;
+  max-height: 720px;
+}
+
+.x-btn {
+  position   : fixed;
+  top        : 5%;
+  right      : 5%;
+  /* float   : right; */
+  padding-top: 0px;
+  cursor     : pointer;
+}
+
+.left-btn {
+  /* float: right; */
+  left         : 5%;
+  padding-right: 0px;
+  position     : fixed;
+  top          : 50%;
+  cursor       : pointer;
+}
+
+.right-btn {
+  /* float: right; */
+  right           : 5%;
+  /* padding-right: 0px; */
+  position        : fixed;
+  top             : 50%;
+  cursor          : pointer;
+}
+
+.dynamic-img {
+  width   : 70%;
+  height  : auto;
+  margin  : 0 auto;
+  position: relative;
+}
+
+.dynamic-img img {
+  width           : 100% !important;
+  height          : auto !important;
+  transform-origin: 50% 65%;
+  transition      : transform 0.5s, filter 2s ease-in-out;
+  transform       : scale(0.95);
+  filter          : brightness(90%);
+}
+
+.dynamic-img img:hover {
+  filter   : brightness(100%);
+  transform: scale(1);
+  cursor   : pointer;
+}
+
+.my-masonry-grid {
+  display    : -webkit-box;
+  /* Not needed if autoprefixing */
+  display    : -ms-flexbox;
+  /* Not needed if autoprefixing */
+  display    : flex;
+  /* margin-left: -30px; */
+  /* gutter size offset */
+  width      : auto;
+  min-height : 80vh;
+  background : rgba(0, 0, 0, 0.5);
+}
+
+.my-masonry-grid_column {
+  padding-left   : 5px;
+  /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column>div {
+  /* change div to reference your elements you put in <Masonry> */
+  background   : grey;
+  margin-bottom: 30px;
+}
+
+
+@media only screen and (max-width: 500px) {
+  .my-masonry-grid {
+    margin-left: -15px;
+    /* gutter size offset */
+  }
+
+  .my-masonry-grid_column {
+    padding-left: 15px;
+    /* gutter size offset */
+  }
+
+  .my-masonry-grid_column>div {
+    margin-bottom: 15px;
+    /* space between items */
+  }
+
+  .modal-img {
+    /* max-width: 100%; */
+    max-width : 400px;
+    max-height: 400px;
+  }
+
+  .left-btn {
+    top : 90%;
+    left: 40%;
+  }
+
+  .right-btn {
+    top  : 90%;
+    right: 40%;
+  }
+}
+
+/* @media only screen and (max-width: 960px) {
+  .modal-img{
+    max-width: 760px;
+  }
+} */
+
+@keyframes zoominoutsinglefeatured {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1.05, 1.05);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+.modal-content:focus {
+  outline: none;
+}

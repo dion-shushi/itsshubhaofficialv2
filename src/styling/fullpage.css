@@ -1,0 +1,8 @@
+body {
+  background: rgb(226, 231, 233);
+}
+
+#footer {
+  position: static;
+  bottom: 0;
+}

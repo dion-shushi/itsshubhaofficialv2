@@ -1,0 +1,92 @@
+/* img {
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+} */
+
+@import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1&display=swap");
+
+.strip_one {
+  height: auto;
+  width: 95%;
+  margin: auto;
+  position: relative;
+}
+
+.hero-container {
+  height: 70vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  object-fit: contain;
+}
+
+.hero-container > h1 {
+  font-family: "Shippori Mincho B1", serif;
+  color: white;
+  font-size: 60px;
+}
+
+.hero-container > p {
+  margin-top: 8px;
+  color: white;
+  font-size: 20px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.hero-btns {
+  margin-top: 32px;
+}
+
+.hero-btns .btn {
+  margin: 6px;
+}
+
+/* .lifestyle-btn:hover{  
+  background: url(https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/portraits%2FIMG_6883-Edit-Edit.webp?alt=media&token=2ff34a03-5c58-45e9-bb0d-83fa89a84b3e)
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 100vh;
+} */
+
+@media screen and (max-width: 960px) {
+  .hero-container > h1 {
+    font-size: 70px;
+    margin-top: -150px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero-container {
+    text-align: center;
+  }
+
+  .hero-container > h1 {
+    font-size: 25px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+
+  .hero-container > p {
+    font-size: 17px;
+  }
+
+  .btn-mobile {
+    display: block;
+    text-decoration: none;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

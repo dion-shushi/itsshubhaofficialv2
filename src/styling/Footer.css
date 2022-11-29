@@ -1,0 +1,29 @@
+.footer-container{
+    /* position: absolute; */
+    bottom: 0;
+    padding: 1rem;
+    /* background-color: rgb(226, 231, 233); */
+    color: white;
+    text-align: center;
+}
+
+.social_links{
+    padding-top: 13px;
+    display: flex;
+    justify-content: center;
+}
+
+.ig_icon{
+    max-width: 27px;
+}
+
+.copyright_section{
+    font-family: 'Sans serif';
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.copyright_logo{
+    max-width: 15px;
+}

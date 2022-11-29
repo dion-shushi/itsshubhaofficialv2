@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap");
+
+.pictureDiv {
+  width: 95%;
+  height: 100%;
+  display: flex;
+  margin: auto;
+  margin-top: 30px;
+}
+
+#heading {
+  font-family: "Cinzel", serif;
+  text-align: center;
+  font-size: 47px;
+  padding-top: 30px;
+  color: white;
+}
+
+#sub-heading {
+  font-family: "Cinzel", serif;
+  text-align: center;
+  font-size: 15px;
+  padding-bottom: 30px;
+  color: white;
+}
+
+.pictures {
+  height: 70vh;
+  width: 30%;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  /* box-shadow: inset 0 0 0 1000px rgba(65, 30, 30, 0.2); */
+  object-fit: contain;
+}
+
+.portraits {
+  background: url("https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/portraits%2Fluke_01.webp?alt=media&token=2552d759-64e4-4c0e-a175-bd48f1ce68b9")
+    center center/cover no-repeat;
+  flex: 1;
+}
+
+.events {
+  background: url("https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/events%2Fvolunteerings%2Fnasir_01.jpg?alt=media&token=6438530a-9dd6-4819-966e-64e661f1a144")
+    center center/cover no-repeat;
+  flex: 1;
+}
+
+.graduation {
+  background: url("https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/events%2Fgraduations%2FIMG_6642(1).jpg?alt=media&token=c1eac90a-f04b-49f6-8916-588782c4c943")
+    center center/cover no-repeat;
+  flex: 1;
+}
+
+.engagements {
+  background: url("https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/events%2Fengagements%2Fmain_pic.jpg?alt=media&token=2b5fa736-8e9f-4f97-93f8-8f7c7a5e3f1d")
+    center center/cover no-repeat;
+  flex: 1;
+}
+
+.volunteering {
+  background: url("https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/events%2Fvolunteerings%2Fnasir_01.jpg?alt=media&token=6438530a-9dd6-4819-966e-64e661f1a144")
+    center center/cover no-repeat;
+  flex: 1;
+}
+
+.pictures > span {
+  font-family: "Shippori Mincho B1", serif;
+  color: white;
+  font-size: 50px;
+  line-height: 1.5;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.image-button {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  line-height: 40px;
+  height: 40px;
+  width: 110px;
+  font-family: "Avenir", sans-serif;
+  font-size: 16px;
+  transition: all 0.4s linear;
+  text-align: center;
+}
+
+.image-button:hover {
+  cursor: pointer;
+  background-color: #243c4c;
+  border-color: #243c4c;
+}
+
+@media screen and (max-width: 960px) {
+  .pictureDiv {
+    width: 95%;
+    height: 100%;
+    display: block;
+    margin: auto;
+  }
+
+  .pictures {
+    height: 30vh;
+    width: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+    object-fit: contain;
+  }
+
+  #heading {
+    font-size: 30px;
+  }
+
+  .pictures > span {
+    font-size: 30px;
+  }
+}

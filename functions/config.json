@@ -1,0 +1,15 @@
+{
+    "user": "shubhajoshi21@gmail.com",
+    "pass": "erdjiriglbtqkzfc",
+    "client_id": "707302883002-hlsd59il48g1bdrq69aadsjfpbitceur.apps.googleusercontent.com",
+    "project_id": "nodemailerproject-308300",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "5Ata9mqX-0zpabC8UWx_Z2qm",
+    "redirect_uris": [
+        "https://developers.google.com/oauthplayground"
+    ],
+    "refresh_token": "1//04nPJfQGXMrm3CgYIARAAGAQSNwF-L9IrCxo2koVCJzVE1rOwnliSaMirW1IfrWSRwch6aPh31H6MWtzyUBP8OPosGk4MUEYvTAA",
+    "auth_token": "4/0AX4XfWhU6DyWsyX6rGAKzDjSf4uhiiC0JA2mb3YOKOeHGuI2aQUXd4Vf5lsYIpMHBKPBNg"
+}
