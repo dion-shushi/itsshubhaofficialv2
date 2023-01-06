@@ -87,13 +87,13 @@
   display    : flex;
   /* margin-left: -30px; */
   /* gutter size offset */
-  width      : auto;
-  min-height : 80vh;
-  background : rgba(0, 0, 0, 0.5);
+  /* width      : auto; */
+  /* min-height : 80vh; */
+  /* background : rgba(0, 0, 0, 0.5); */
 }
 
 .my-masonry-grid_column {
-  padding-left   : 5px;
+  /* padding-left   : 5px; */
   /* gutter size */
   background-clip: padding-box;
 }
@@ -108,12 +108,12 @@
 
 @media only screen and (max-width: 500px) {
   .my-masonry-grid {
-    margin-left: -15px;
+    margin-left: 0px;
     /* gutter size offset */
   }
 
   .my-masonry-grid_column {
-    padding-left: 15px;
+    padding-left: 0px;
     /* gutter size offset */
   }
 

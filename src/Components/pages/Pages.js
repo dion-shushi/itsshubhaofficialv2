@@ -1,10 +1,14 @@
 import { Component } from "react";
 import React from "react";
-import "./Pages.css";
+import "../../styling/Pages.css";
 import Modal from "react-modal";
 import Masonry from "react-masonry-css";
 import ArrowKeysReact from "arrow-keys-react";
 // import "react-lazy-load-image-component/src/effects/opacity.css";
+
+// TESTING
+
+import axios from "axios";
 
 import { getDownloadURL, listAll } from "firebase/storage";
 
@@ -12,7 +16,6 @@ class Pages extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
       modalIsOpen: false,
       currentIndex: 0,
       currentImage: "",
@@ -42,7 +45,10 @@ class Pages extends Component {
     this.nextImg = this.nextImg.bind(this);
     this.prevImg = this.prevImg.bind(this);
     this.loadImages = this.loadImages.bind(this);
+  }
 
+  componentDidMount() {
+    this.testResize();
     this.loadImages();
   }
 
@@ -86,10 +92,6 @@ class Pages extends Component {
   };
 
   loadImages() {
-    console.log("loadImages()");
-
-    console.log(listAll(this.state.storageRef));
-
     //gets all the files from that folder
     listAll(this.state.storageRef).then((res) => {
       res.items.forEach((itemRef) => {
@@ -97,19 +99,15 @@ class Pages extends Component {
           this.setState({
             listOfImages: [...this.state.listOfImages, url],
           });
-
-          // console.log(url);
         });
       });
     });
-
-    console.log(this.state.listOfImages);
   }
 
   render() {
-    document.addEventListener("scroll", () => {
-      this.setState({ scrollPosition: document.documentElement.scrollTop });
-    });
+    // document.addEventListener("scroll", () => {
+    //   this.setState({ scrollPosition: document.documentElement.scrollTop });
+    // });
 
     return (
       <div

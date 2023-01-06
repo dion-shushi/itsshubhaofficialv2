@@ -26,11 +26,11 @@
 }
 
 .pictures {
-  height: 70vh;
+  height: 60vh;
   width: 30%;
-  margin-left: 5px;
-  margin-right: 5px;
+  padding: 10px;
   display: flex;
+  margin: 5px;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -44,26 +44,14 @@
   flex: 1;
 }
 
-.events {
-  background: url("https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/events%2Fvolunteerings%2Fnasir_01.jpg?alt=media&token=6438530a-9dd6-4819-966e-64e661f1a144")
-    center center/cover no-repeat;
-  flex: 1;
-}
-
 .graduation {
   background: url("https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/events%2Fgraduations%2FIMG_6642(1).jpg?alt=media&token=c1eac90a-f04b-49f6-8916-588782c4c943")
     center center/cover no-repeat;
   flex: 1;
 }
 
-.engagements {
-  background: url("https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/events%2Fengagements%2Fmain_pic.jpg?alt=media&token=2b5fa736-8e9f-4f97-93f8-8f7c7a5e3f1d")
-    center center/cover no-repeat;
-  flex: 1;
-}
-
-.volunteering {
-  background: url("https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/events%2Fvolunteerings%2Fnasir_01.jpg?alt=media&token=6438530a-9dd6-4819-966e-64e661f1a144")
+.products {
+  background: url("https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/Skateboard-min.jpg?alt=media&token=f0bd8533-c567-4865-9fee-b4e2916b8a8e")
     center center/cover no-repeat;
   flex: 1;
 }
@@ -102,24 +90,20 @@
     height: 100%;
     display: block;
     margin: auto;
+    margin-top: 10px;
   }
 
   .pictures {
     height: 30vh;
     width: 100%;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+    margin: 0px;
+    margin-bottom: 10px;
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
-    object-fit: contain;
   }
 
   #heading {
     font-size: 30px;
+    padding-top: 5px;
   }
 
   .pictures > span {

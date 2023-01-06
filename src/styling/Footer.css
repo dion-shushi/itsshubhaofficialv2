@@ -1,10 +1,8 @@
 .footer-container{
-    /* position: absolute; */
-    bottom: 0;
     padding: 1rem;
-    /* background-color: rgb(226, 231, 233); */
     color: white;
     text-align: center;
+    margin: auto;
 }
 
 .social_links{
@@ -26,4 +24,11 @@
 
 .copyright_logo{
     max-width: 15px;
+}
+
+@media screen and (max-width: 960px) {
+    .footer-container{
+        font-size: 15px;;
+        width: max-content;
+    }
 }

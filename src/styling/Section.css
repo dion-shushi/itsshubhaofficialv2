@@ -1,0 +1,99 @@
+.section{
+    margin: auto;
+    width: max-content;
+    max-width: 40%;
+    margin-top: 50px;
+}
+
+.descriptionSection{
+    color: white;
+    display: grid;
+    grid-template-columns: 25% 80%;
+}
+
+.descriptionSectionNullImage{
+    color: white;
+    display: grid;
+    grid-template-columns: 0 100%;
+    width: max-content;
+    margin-bottom: 10px;
+}
+
+.textSection{
+    /* position: relative;
+    overflow:hidden; */
+}
+
+.text{
+    /* position: absolute; */
+    bottom: 0;
+    width: max-content;
+}
+
+.sectionTitle{
+    font-size: 40px;
+    font-family: "Shippori Mincho B1", serif;
+}
+
+.shortDesc{
+    /* margin-bottom: 20px; */
+    font-family: "Shippori Mincho B1", serif;
+}
+
+.sectionImage{
+    padding-right: 5px;
+    width: 100%;
+}
+
+.productImages{
+    height: 230px;
+    width: 230px;
+    object-fit: cover;
+    padding: 10px;
+}
+
+@media screen and (max-width: 960px) {
+    .section{
+        max-width: 90%;
+        margin-top: 10px;
+    }
+    
+    .descriptionSection{
+        width: 100%;
+        max-width: none;
+        grid-template-columns: 25% 75%;
+    }
+
+    .descriptionSectionNullImage{
+        width: 100%;
+        max-width: none;
+        padding-left: 10px;
+    }
+    
+    
+    .text{
+        bottom: 0;
+        max-width: 100%;
+    }
+    
+    .sectionTitle{
+        font-size: 18px;
+    }
+    
+    .shortDesc{
+        margin-bottom: 0px;
+        font-size:13px;
+    }
+    
+    .sectionImage{
+        width: 100%;
+        object-fit: contain;
+    }
+    
+    .productImages{
+        height: 170px;
+        width: 170px;
+        object-fit: cover;
+        padding: 10px;
+    }
+}

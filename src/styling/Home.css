@@ -71,7 +71,7 @@
 
   .hero-container > h1 {
     font-size: 25px;
-    top: 50%;
+    top: 60%;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
@@ -84,9 +84,5 @@
   .btn-mobile {
     display: block;
     text-decoration: none;
-  }
-
-  .btn {
-    width: 100%;
   }
 }

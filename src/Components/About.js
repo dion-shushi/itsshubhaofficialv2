@@ -1,47 +1,24 @@
-import { Component } from "react";
+import { useEffect } from "react";
 import "../styling/About.css";
 
-class About extends Component {
-  render() {
-    return (
-      <div className="about-page">
-        <div>
-          <h2 className="universal_font about-us-text">ABOUT US</h2>
-        </div>
-        <div className="about-content1">
-          <div className="about-shubha">
-            <div className="about-shubha-child shubha-picture">
-              <img
-                src="https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/contacts%2FShubha%20Joshi-min.jpg?alt=media&token=b5596b34-1b87-4d97-a03d-9fd0ecbc6332"
-                alt=""
-              ></img>
-            </div>
-            <div className="about-shubha-child shubha-content">
-              <h2 className="name">My name is Shubha Joshi</h2>
-              <p>
-                I'm a Photographer and a Videographer. I'm a creative
-                sotryteller that demonstrates visual narrative thorugh the lens.
-                I'm currently based in Houston, Texas but am able to travel
-                anywhere to get the job done.{" "}
-              </p>
-            </div>
-          </div>
-        </div>
+function About() {
+  useEffect(() => {});
 
-        <div className="about-content2">
-          <div className="main-msg-content">
-            <div className="msg-content-child">
-              <p>
-                Precious moments are what matters, to me its more about the
-                journey then the end. So help me help you capture those moments
-                and preserve your memories of a lifetime.
-              </p>
-            </div>
-          </div>
-        </div>
+  return (
+    <div className="about-page">
+      <div>
+        <h2 className="universal_font title">WHO IS SHUBHA JOSHI</h2>
       </div>
-    );
-  }
+      <div className="about-text">
+        I’m a professional photographer based in Houston, Texas. Photography is
+        my passion and I think my true calling. I strive to capture incredible
+        moments and tell breathtaking stories. Whether I’m documenting my
+        relatives birthdays or working for my clients, I strive to create the
+        best image possible. Memories are precious and as a photographer, I take
+        pride in freezing those precious moments in time for generations to see.
+      </div>
+    </div>
+  );
 }
 
 export default About;

@@ -19,7 +19,7 @@ function Portfolio() {
             View
           </Link>
         </div>
-        <div className="pictures graduation">
+        <div className="pictures products">
           <span id="portrait-text" className="picture-text">
             Products
           </span>

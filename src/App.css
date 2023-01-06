@@ -16,10 +16,19 @@
 .whole-page {
   background: url("https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/background.jpg?alt=media&token=81851afb-0242-41b9-8b24-10f09c93f38b")
     no-repeat center center fixed;
+    /* background-color: #0E0301; */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   min-height: 100vh;
   transition: all 0.2s ease-in-out 0.2s;
+  position: relative;
 }
+
+/* .footer{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */

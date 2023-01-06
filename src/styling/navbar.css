@@ -19,15 +19,16 @@
 }
 
 .navbar-logo {
-  font-family    : 'Dr Sugiyama', cursive;
+  font-family: "Shippori Mincho B1", serif;
   color          : rgb(255, 255, 255);
   justify-self   : start;
   margin-left    : 20px;
   cursor         : pointer;
   text-decoration: none;
-  font-size      : 3rem;
+  font-size      : 1.5rem;
   display        : flex;
   align-items    : center;
+  content: 'ITSSHUBHAOFFICIAL'
 }
 
 .fa-typo3 {
@@ -88,7 +89,7 @@
     left           : -100%;
     opacity        : 1;
     transition     : all 0.5s ease;
-    justify-content: start;
+    justify-content: flex-start;
   }
 
   .nav-menu.active {
@@ -115,7 +116,7 @@
 
   .navbar-logo {
     position : absolute;
-    font-size: 40px;
+    font-size: 20px;
     top      : 0;
     left     : 0;
     transform: translate(25%, 50%);
@@ -156,4 +157,36 @@
     color     : #242424;
     transition: 250ms;
   }
+}
+
+/* smartphones, iPhone, portrait 480x320 phones */
+@media (min-width:320px)  {  
+
+}
+
+/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+@media (min-width:481px)  {  
+  
+}
+
+/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
+@media (min-width:641px)  { 
+  .nav-menu{
+    width: 52vw;
+  }
+}
+
+/* low res ipad landscape + desktops */
+@media (min-width:961px) {
+
+}
+
+/* laptops + desktops */
+@media (min-width:1025px) {
+    
+}
+
+/* hi rez laptops + desktops */
+@media (min-width:1281px){
+
 }

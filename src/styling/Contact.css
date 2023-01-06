@@ -5,6 +5,7 @@
     display         : flex;
     margin-left     : 100px;
     margin-right    : 100px;
+    margin-bottom: 50px;
     color           : white;
     background-color: rgba(0, 0, 0, 0.1);
     height: 70vh;
