@@ -19,6 +19,17 @@ function Portfolio() {
             View
           </Link>
         </div>
+        <div className="pictures portraits">
+          <span className="picture-text">TEST</span>
+          <Link
+            to="/test"
+            className="image-button"
+            id="portrait-button"
+            style={{ textDecoration: "none" }}
+          >
+            View
+          </Link>
+        </div>
         <div className="pictures products">
           <span id="portrait-text" className="picture-text">
             Products

@@ -1,5 +1,10 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
+const {
+  getFirestore,
+  Timestamp,
+  FieldValue,
+} = require("firebase-admin/firestore");
 const nodemailer = require("nodemailer");
 const cors = require("cors")({ origin: true });
 const sharp = require("sharp");
@@ -8,7 +13,11 @@ const path = require("path");
 const os = require("os");
 const fs = require("fs");
 
-admin.initializeApp();
+var serviceAccount = require("./itsshubhaofficial-firebase-adminsdk-80i2r-a7f2a1c2dd.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 
 //config for gmail auth
 const CONFIG = require("./config.json");
@@ -56,7 +65,7 @@ exports.sendMail = functions.https.onRequest((req, res) => {
 });
 
 exports.imageUploadTrigger = functions.storage
-  .bucket("itsshubhaofficial")
+  .bucket("itsshubhaofficial.appspot.com")
   .object()
   .onFinalize(async (object) => {
     console.log(
@@ -83,6 +92,19 @@ exports.imageUploadTrigger = functions.storage
       return functions.logger.log("Already a Thumbnail.");
     }
 
+    const db = getFirestore();
+    let docRef = db.collection("people").doc("graduation");
+
+    if (fileName.startsWith("grad_")) {
+      docRef = db.collection("people").doc("graduation");
+    } else if (fileName.startsWith("coup_)")) {
+      docRef = db.collection("people").doc("couples");
+    } else if (fileName.startsWith("cel_)")) {
+      docRef = db.collection("products").doc("celcius");
+    } else if (fileName.startsWith("dod_)")) {
+      docRef = db.collection("products").doc("dodgeChallenger");
+    }
+
     const outputFileName = path.basename("out_" + uploadedFilePath);
     const tempFilePath = path.join(os.tmpdir(), fileName);
     const tempOutputFilePath = path.join(os.tmpdir(), outputFileName);
@@ -98,7 +120,7 @@ exports.imageUploadTrigger = functions.storage
 
     // "input" file gets compressed and saved as "output"
     await sharp(tempFilePath)
-      .resize({ width: 200 })
+      .resize({ width: 1080 })
       .toFile(tempOutputFilePath)
       .then((newFileInfo) => {
         console.log("Success");
@@ -132,6 +154,14 @@ exports.imageUploadTrigger = functions.storage
 
     console.log("THUMBNAIL UPLOADEDD!!!!");
 
+    // Get the thumbnail's public path and add it to db
+    const fileUrl = uploadBucket.file(thumbFilePath).publicUrl();
+    console.log(fileUrl);
+
+    await docRef.update({
+      Pictures: FieldValue.arrayUnion(fileUrl),
+    });
+
     return fs.unlink(tempOutputFilePath, (err) => {
       if (err) throw err;
       console.log("FILE DELETED -2- " + tempOutputFilePath);
@@ -139,7 +169,7 @@ exports.imageUploadTrigger = functions.storage
   });
 
 exports.imageDeleteTrigger = functions.storage
-  .bucket("itsshubhaofficial")
+  .bucket("itsshubhaofficial.appspot.com")
   .object()
   .onDelete(async (object) => {
     console.log(
@@ -180,6 +210,8 @@ exports.imageDeleteTrigger = functions.storage
         console.log("Error");
         throw err;
       });
+
+    // TODO: also delete from firestore
 
     return;
   });

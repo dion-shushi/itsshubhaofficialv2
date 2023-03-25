@@ -48,8 +48,8 @@ class Pages extends Component {
   }
 
   componentDidMount() {
-    this.testResize();
     this.loadImages();
+    console.log(this.state.listOfImages);
   }
 
   openModal = () => {
@@ -91,18 +91,20 @@ class Pages extends Component {
       });
   };
 
-  loadImages() {
+  loadImages = async () => {
     //gets all the files from that folder
-    listAll(this.state.storageRef).then((res) => {
+    console.log("loadImages() function is being called");
+    await listAll(this.state.storageRef).then((res) => {
       res.items.forEach((itemRef) => {
         getDownloadURL(itemRef).then((url) => {
+          console.log(url);
           this.setState({
             listOfImages: [...this.state.listOfImages, url],
           });
         });
       });
     });
-  }
+  };
 
   render() {
     // document.addEventListener("scroll", () => {

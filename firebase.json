@@ -1,10 +1,12 @@
 {
-  "functions": {
-    "predeploy": [
-      "npm --prefix $Env:RESOURCE_DIR run lint"
-    ],
-    "source": "functions"
-  },
+  "functions": [
+    {
+      "predeploy": [
+        "npm --prefix $Env:RESOURCE_DIR run lint"
+      ],
+      "source": "functions"
+    }
+  ],
   "hosting": {
     "public": "build",
     "ignore": [
@@ -21,5 +23,30 @@
   },
   "storage": {
     "rules": "storage.rules"
+  },
+  "emulators": {
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 5002
+    },
+    "hosting": {
+      "port": 5000
+    },
+    "storage": {
+      "port": 9199
+    },
+    "ui": {
+      "enabled": true
+    },
+    "singleProjectMode": true
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "remoteconfig": {
+    "template": "remoteconfig.template.json"
   }
 }

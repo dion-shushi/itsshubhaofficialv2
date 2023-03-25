@@ -10,6 +10,7 @@ import Portfolio from "./Components/Portfolio";
 import People from "./Components/Portfolio/People/People";
 import Products from "./Components/Portfolio/Products/Products";
 import Footer from "./Components/Footer";
+import Tests from "./Components/Portfolio/Test/Tests";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/people" element={<People />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/test" element={<Tests />} />
       </Routes>
       <div className="footer">
         <Footer />
