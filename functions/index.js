@@ -1,5 +1,6 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
+const { Firestore } = require("@google-cloud/firestore");
 const {
   getFirestore,
   Timestamp,
@@ -92,8 +93,9 @@ exports.imageUploadTrigger = functions.storage
       return functions.logger.log("Already a Thumbnail.");
     }
 
+    // create a db collection and document
     const db = getFirestore();
-    let docRef = db.collection("people").doc("graduation");
+    let docRef = db.collection("people").doc("graduation"); // -- used later in the function
 
     if (fileName.startsWith("grad_")) {
       docRef = db.collection("people").doc("graduation");
@@ -155,11 +157,19 @@ exports.imageUploadTrigger = functions.storage
     console.log("THUMBNAIL UPLOADEDD!!!!");
 
     // Get the thumbnail's public path and add it to db
-    const fileUrl = uploadBucket.file(thumbFilePath).publicUrl();
-    console.log(fileUrl);
+    const compressedFileUrl = uploadBucket.file(thumbFilePath).publicUrl();
+    const uncompressedFileUrl = bucket.file(uploadedFilePath).publicUrl();
+    console.log(`Compressed path: ${compressedFileUrl}`);
+    console.log(`Ujnompressed path: ${uncompressedFileUrl}`);
 
+    // add path of compressed images to firestore
     await docRef.update({
-      Pictures: FieldValue.arrayUnion(fileUrl),
+      compressed: FieldValue.arrayUnion(compressedFileUrl),
+    });
+
+    // also add path of full images to firestore
+    await docRef.update({
+      uncompressed: FieldValue.arrayUnion(uncompressedFileUrl),
     });
 
     return fs.unlink(tempOutputFilePath, (err) => {
@@ -168,6 +178,9 @@ exports.imageUploadTrigger = functions.storage
     });
   });
 
+//TODO: when file gets deleted, delete element from firestore as well
+
+// deletes thumbnail image from storage when image is deleted
 exports.imageDeleteTrigger = functions.storage
   .bucket("itsshubhaofficial.appspot.com")
   .object()
@@ -215,3 +228,28 @@ exports.imageDeleteTrigger = functions.storage
 
     return;
   });
+
+exports.returnDocs = functions.https.onRequest(async (req, res) => {
+  console.log(req.query);
+  let allImages = {
+    compressed: [],
+    uncompressed: [],
+  };
+
+  const firestore = new Firestore();
+
+  cors(req, res, async () => {
+    const document = firestore.doc(
+      `${req.query.collection}/${req.query.document}`
+    );
+    const doc = await document.get();
+    if (!doc.exists) {
+      res.send("No such document!");
+    } else {
+      allImages.compressed = doc.data()["compressed"];
+      allImages.uncompressed = doc.data()["uncompressed"];
+      console.log("All Data:", allImages);
+      res.send(allImages);
+    }
+  });
+});
