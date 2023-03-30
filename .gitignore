@@ -36,4 +36,5 @@ functions/ui-debug.log
 firestore-debug.log
 firestore.indexes.json
 remoteconfig.template.json
-src/firebase/config.js
+storage.rules
+firestore.rules
