@@ -6,8 +6,8 @@ A personal website where I showcase my photography work.
 There are a lot of things to do and features to add but I plan to make this a full fledge site where it will provide the most value to the end users (photography clients).
 
 ## Technologies used:
-- ReactJS: Front-End 
-- Firebase (NodeJS): Back-End + Storage + Database + Hosting
+- ReactJS: Front-End
+- Firebase: Back-End (NodeJS) + Storage + Database + Hosting
 
 ## Features to add/improve:
 - [ ] **Improve load speed** <-- *Currently working on*
