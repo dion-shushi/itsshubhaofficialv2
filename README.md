@@ -1,1 +1,23 @@
-I’m a professional photographer based in Houston, Texas. Photography is my passion and I think my true calling. I strive to capture incredible moments and tell breathtaking stories. Whether I’m documenting my relatives birthdays or working for my clients, I strive to create the best image possible. Memories are precious and as a photographer, I take pride in freezing those precious moments in time for generations to see.
+Visit the site here: [itsshubhaofficial.com](https://itsshubhaofficial.com)
+
+# Description
+A personal website where I showcase my photography work.
+
+There are a lot of things to do and features to add but I plan to make this a full fledge site where it will provide the most value to the end users (photography clients).
+
+## Technologies used:
+- ReactJS
+- Firebase
+
+## Features to add/improve:
+- [ ] **Improve load speed** <-- *Currently working on*
+- [ ] Redesign some pages (Contact, About, Portfolio)
+- [ ] Recategorize the images (People, Product, Places)
+- [ ] Payment system
+- [ ] Appointment booking
+
+## Completed tasks:
+- [x] Display images appropriate to the page
+- [x] Contact page
+- [x] Responsive design
+
