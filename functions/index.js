@@ -13,7 +13,7 @@ const path = require("path");
 const os = require("os");
 const fs = require("fs");
 
-var serviceAccount = require("./itsshubhaofficial-firebase-adminsdk-80i2r-a7f2a1c2dd.json");
+var serviceAccount = require("./firebase-admin-config.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

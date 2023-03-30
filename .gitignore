@@ -13,9 +13,9 @@
 /public
 
 # config files
-src/config.js
-functions/itsshubhaofficial-firebase-adminsdk-80i2r-a7f2a1c2dd.json
-functions/config.js
+/src/firebase
+functions/firebase-admin-config.json
+functions/config.json
 
 # misc
 .DS_Store
@@ -36,3 +36,4 @@ functions/ui-debug.log
 firestore-debug.log
 firestore.indexes.json
 remoteconfig.template.json
+src/firebase/config.js
