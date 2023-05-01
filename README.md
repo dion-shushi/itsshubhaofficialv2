@@ -21,3 +21,10 @@ There are a lot of things to do and features to add but I plan to make this a fu
 - [x] Contact page
 - [x] Responsive design
 
+## Dev log
+### April 30, 2023
+I'm having some trouble with improving the speed of the site. Things I've done:
+- Converted all images to type WebP
+- Improved logic to show compressed images first then uncompressed when clicked
+
+Site's performance is very low according to [PageSpeed Insights](https://pagespeed.web.dev/analysis/https-itsshubhaofficial-com-graduation/8sxwm8d0vj?form_factor=mobile)
