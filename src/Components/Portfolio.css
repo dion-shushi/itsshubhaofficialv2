@@ -38,14 +38,20 @@
   object-fit: contain;
 }
 
-.portraits {
-  background: url("https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/portraits%2Fluke_01.webp?alt=media&token=2552d759-64e4-4c0e-a175-bd48f1ce68b9")
+.lifestyle {
+  background: url("../Images/lifestyle_luke.webp")
     center center/cover no-repeat;
   flex: 1;
 }
 
 .graduation {
-  background: url("https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/events%2Fgraduations%2FIMG_6642(1).jpg?alt=media&token=c1eac90a-f04b-49f6-8916-588782c4c943")
+  background: url("../Images/graduation_coral.jpg")
+    center center/cover no-repeat;
+  flex: 1;
+}
+
+.events {
+  background: url("../Images/events_50.jpg")
     center center/cover no-repeat;
   flex: 1;
 }

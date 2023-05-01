@@ -1,4 +1,4 @@
-import { getDownloadURL, listAll } from "firebase/storage";
+import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
 import Masonry from "react-masonry-css";
@@ -9,10 +9,32 @@ import "../../styling/Section.css";
 import "../../styling/Pages.css";
 
 function Section(props) {
-  const [listOfImages, setImages] = useState([]);
+  const [compressedImages, setCompImages] = useState([]);
+  const [unCompressedImages, setUnCompImages] = useState([]);
+
   const [modalIsOpen, setModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState("");
+
+  const fetchImages = async () => {
+    try {
+      let response = await axios.get(
+        `http://127.0.0.1:5001/itsshubhaofficial/us-central1/returnDocs`,
+        {
+          params: {
+            collection: props.collection,
+            document: props.document,
+          },
+        }
+      );
+      let data = response.data;
+      console.log(data);
+      setCompImages([...compressedImages, ...data.compressed]);
+      setUnCompImages([...unCompressedImages, ...data.uncompressed]);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const breakpointColumnsObj = {
     default: 1,
@@ -24,12 +46,7 @@ function Section(props) {
   const modal = useRef();
 
   useEffect(() => {
-    loadImages(props.storageRef);
-    console.log("being called twice?");
-
-    return () => {
-      setImages([]);
-    };
+    fetchImages();
   }, []);
 
   const openModal = () => {
@@ -41,41 +58,23 @@ function Section(props) {
   };
 
   const afterOpenModal = () => {
-    // document.getElementById(
-    //   "dynamic-modal"
-    // ).innerHTML = `<img class="modal-img" src=${
-    //   this.state.listOfImages[this.state.currentIndex]
-    // }/>`;
     modal.current.focus();
   };
 
-  const enlargeImage = (image, index) => {
-    setCurrentImage(image.default);
+  const enlargeImage = (index) => {
     setCurrentIndex(index);
     openModal();
   };
 
   const nextImg = () => {
-    if (currentIndex < listOfImages.length - 1) {
+    if (currentIndex < compressedImages.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else setCurrentIndex(0);
   };
 
   const prevImg = () => {
     if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
-    else setCurrentIndex(listOfImages.length - 1);
-  };
-
-  const loadImages = (storageRef) => {
-    listAll(storageRef).then((res) => {
-      res.items.forEach((itemRef) => {
-        getDownloadURL(itemRef).then((url) => {
-          // let newAr = [...listOfImages];
-          // newAr.push(url);
-          setImages((listOfImages) => [...listOfImages, url]);
-        });
-      });
-    });
+    else setCurrentIndex(compressedImages.length - 1);
   };
 
   const UseMasonary = () => {
@@ -86,25 +85,23 @@ function Section(props) {
           className="my-masonry-grid ruleOfThirds"
           columnClassName="my-masonry-grid_column"
         >
-          {listOfImages.map((image, index) => (
+          {compressedImages.map((photoSrc, index) => (
             <img
               className="productImages"
-              onClick={() => enlargeImage(image, index)}
+              src={photoSrc}
               key={index}
-              src={image}
-              alt="info"
+              onClick={() => enlargeImage(index)}
             />
           ))}
         </Masonry>
       );
     } else {
-      return listOfImages.map((image, index) => (
+      return compressedImages.map((photoSrc, index) => (
         <img
           className="productImages"
-          onClick={() => enlargeImage(image, index)}
+          src={photoSrc}
           key={index}
-          src={image}
-          alt="info"
+          onClick={() => enlargeImage(index)}
         />
       ));
     }
@@ -141,7 +138,7 @@ function Section(props) {
             onClick={prevImg}
           />
           <div id="dynamic-modal">
-            <img className="modal-img" src={listOfImages[currentIndex]} />
+            <img className="modal-img" src={unCompressedImages[currentIndex]} />
           </div>
         </Modal>
         <div

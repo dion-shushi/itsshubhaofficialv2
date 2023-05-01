@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import "../styling/About.css";
+import me from "../Images/self.jpg";
 
 function About() {
   useEffect(() => {});
@@ -9,13 +10,17 @@ function About() {
       <div>
         <h2 className="universal_font title">WHO IS SHUBHA JOSHI</h2>
       </div>
-      <div className="about-text">
-        I’m a professional photographer based in Houston, Texas. Photography is
-        my passion and I think my true calling. I strive to capture incredible
-        moments and tell breathtaking stories. Whether I’m documenting my
-        relatives birthdays or working for my clients, I strive to create the
-        best image possible. Memories are precious and as a photographer, I take
-        pride in freezing those precious moments in time for generations to see.
+      <div className="about-content">
+        <img className="self-picture" src={me} />
+        <p className="about-text">
+          As a professional photographer based in Houston, Texas, I am deeply
+          passionate about the craft and art behind it. My goal is to capture
+          unforgettable moments and create breathtaking stories through my lens.
+          Whether I am photographing my relatives' birthdays or working with
+          clients, my aim is to produce the best possible images. Preserving
+          precious memories is a source of pride for me as a photographer,
+          freezing those special moments in time for generations to cherish.
+        </p>
       </div>
     </div>
   );

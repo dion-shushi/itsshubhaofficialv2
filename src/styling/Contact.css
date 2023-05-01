@@ -8,12 +8,12 @@
     margin-bottom: 50px;
     color           : white;
     background-color: rgba(0, 0, 0, 0.1);
-    height: 70vh;
+    height: fit-content;
 }
 
 .contact_col_left {
     width           : 50%;
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/phone_booth_walking_in.jpg?alt=media&token=984527b4-04a8-4ac9-b098-95f2e8e2b4df');
+    background-image: url('../Images/self_contact.jpg');
     background-size : cover;
 }
 

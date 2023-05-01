@@ -47,16 +47,6 @@
   margin: 6px;
 }
 
-/* .lifestyle-btn:hover{  
-  background: url(https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/portraits%2FIMG_6883-Edit-Edit.webp?alt=media&token=2ff34a03-5c58-45e9-bb0d-83fa89a84b3e)
-    no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  min-height: 100vh;
-} */
-
 @media screen and (max-width: 960px) {
   .hero-container > h1 {
     font-size: 70px;

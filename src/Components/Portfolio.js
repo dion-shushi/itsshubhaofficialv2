@@ -5,13 +5,13 @@ function Portfolio() {
   return (
     <>
       <div id="title">
-        <p id="heading"> portfolio </p>
+        <p id="heading">Portfolio </p>
       </div>
       <div className="pictureDiv">
-        <div className="pictures portraits">
-          <span className="picture-text">People</span>
+        <div className="pictures graduation">
+          <span className="picture-text">Graduation</span>
           <Link
-            to="/people"
+            to="/graduation"
             className="image-button"
             id="portrait-button"
             style={{ textDecoration: "none" }}
@@ -19,10 +19,10 @@ function Portfolio() {
             View
           </Link>
         </div>
-        <div className="pictures portraits">
-          <span className="picture-text">TEST</span>
+        <div className="pictures lifestyle">
+          <span className="picture-text">Lifestyle</span>
           <Link
-            to="/test"
+            to="/lifestyle"
             className="image-button"
             id="portrait-button"
             style={{ textDecoration: "none" }}
@@ -30,12 +30,12 @@ function Portfolio() {
             View
           </Link>
         </div>
-        <div className="pictures products">
+        <div className="pictures events">
           <span id="portrait-text" className="picture-text">
-            Products
+            Events
           </span>
           <Link
-            to="/products"
+            to="/events"
             className="image-button"
             id="portrait-button"
             style={{ textDecoration: "none" }}

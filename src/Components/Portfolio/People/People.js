@@ -1,15 +1,50 @@
 import React from "react";
-import Pages from "../../pages/Pages";
-import { peopleStorageRef } from "../../../firebase/config";
 import "../../Portfolio.css";
-import PagesFunc from "../../pages/PagesFunc";
+import { Link } from "react-router-dom";
 
 function People() {
   return (
     <>
-      {/* <Pages list={this.state.listOfUrl} title="LIFESTYLE" /> */}
-      <Pages list={[]} storageRef={peopleStorageRef} title="PEOPLE" />
-      {/* <PagesFunc storageRef={peopleStorageRef} title="PEOPLE" /> */}
+      <div id="title">
+        <p id="heading"> People </p>
+      </div>
+      <div className="pictureDiv">
+        <div className="pictures graduation">
+          <span className="picture-text">Graduation</span>
+          <Link
+            to="/graduation"
+            className="image-button"
+            id="portrait-button"
+            style={{ textDecoration: "none" }}
+          >
+            View
+          </Link>
+        </div>
+        <div className="pictures portraits">
+          <span className="picture-text">Lifestyle</span>
+          <Link
+            to="/lifestyle"
+            className="image-button"
+            id="portrait-button"
+            style={{ textDecoration: "none" }}
+          >
+            View
+          </Link>
+        </div>
+        <div className="pictures events">
+          <span id="portrait-text" className="picture-text">
+            Events
+          </span>
+          <Link
+            to="/events"
+            className="image-button"
+            id="portrait-button"
+            style={{ textDecoration: "none" }}
+          >
+            View
+          </Link>
+        </div>
+      </div>
     </>
   );
 }

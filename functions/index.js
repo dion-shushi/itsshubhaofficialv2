@@ -1,23 +1,23 @@
 const functions = require("firebase-functions");
+const { Firestore } = require("@google-cloud/firestore");
 const admin = require("firebase-admin");
-const {
-  getFirestore,
-  Timestamp,
-  FieldValue,
-} = require("firebase-admin/firestore");
+const { getFirestore } = require("firebase-admin/firestore");
 const nodemailer = require("nodemailer");
 const cors = require("cors")({ origin: true });
 const sharp = require("sharp");
+
+// env variables
+var serviceAccount = require("./firebase-admin-config.json");
 
 const path = require("path");
 const os = require("os");
 const fs = require("fs");
 
-var serviceAccount = require("./firebase-admin-config.json");
-
-admin.initializeApp({
+const firebase = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
+
+const firestore = firebase.firestore();
 
 //config for gmail auth
 const CONFIG = require("./config.json");
@@ -53,9 +53,6 @@ exports.sendMail = functions.https.onRequest((req, res) => {
     return transporter.sendMail(mailOptions, (erro, info) => {
       res.set("Access-Control-Allow-Origin", "*");
       if (erro) {
-        // console.log("ERROR");
-        // console.log(erro.toString());
-        // return res.send(erro.toString());
         return res.send(erro);
       }
       console.log("Email sent");
@@ -80,6 +77,15 @@ exports.imageUploadTrigger = functions.storage
     console.log("UPLOADED FILE PATH: " + uploadedFilePath);
     console.log("UPLOADED FILE CONTENT TYPE: " + uploadedFileContentType);
 
+    const splitFilePath = uploadedFilePath.split("/");
+
+    if (splitFilePath.length == 0) {
+      functions.logger.log("File is not in a folder.");
+      return;
+    }
+
+    const folderName = splitFilePath[0];
+
     // Exit if this is triggered on a file that is not an image.
     if (!uploadedFileContentType.startsWith("image/")) {
       functions.logger.log("This is not an image.");
@@ -87,27 +93,19 @@ exports.imageUploadTrigger = functions.storage
     }
 
     const fileName = path.basename(uploadedFilePath);
+    console.log("FILENAME: " + fileName);
     // Exit if the image is already a thumbnail.
     if (fileName.startsWith("thumb_")) {
       return functions.logger.log("Already a Thumbnail.");
     }
 
-    const db = getFirestore();
-    let docRef = db.collection("people").doc("graduation");
-
-    if (fileName.startsWith("grad_")) {
-      docRef = db.collection("people").doc("graduation");
-    } else if (fileName.startsWith("coup_)")) {
-      docRef = db.collection("people").doc("couples");
-    } else if (fileName.startsWith("cel_)")) {
-      docRef = db.collection("products").doc("celcius");
-    } else if (fileName.startsWith("dod_)")) {
-      docRef = db.collection("products").doc("dodgeChallenger");
-    }
-
-    const outputFileName = path.basename("out_" + uploadedFilePath);
+    const outputFileName = "out_" + fileName;
     const tempFilePath = path.join(os.tmpdir(), fileName);
     const tempOutputFilePath = path.join(os.tmpdir(), outputFileName);
+
+    console.log("outputFileName: ", outputFileName);
+    console.log("tempFilePath: ", tempFilePath);
+    console.log("tempOutputFilePath: ", tempOutputFilePath);
 
     // Download 2 files | One as "input" and another as "output"
     const bucket = admin.storage().bucket(uploadedFileBucket);
@@ -136,10 +134,7 @@ exports.imageUploadTrigger = functions.storage
       });
 
     const thumbFileName = `thumb_${fileName}`;
-    const thumbFilePath = path.join(
-      path.dirname(uploadedFilePath),
-      thumbFileName
-    );
+    const thumbFilePath = `${folderName}/${thumbFileName}`;
 
     // Uploading the thumbnail.
     const uploadBucket = admin.storage().bucket("itsshubhaofficial-compressed");
@@ -154,13 +149,49 @@ exports.imageUploadTrigger = functions.storage
 
     console.log("THUMBNAIL UPLOADEDD!!!!");
 
-    // Get the thumbnail's public path and add it to db
-    const fileUrl = uploadBucket.file(thumbFilePath).publicUrl();
-    console.log(fileUrl);
+    // Get the thumbnail's public path
 
-    await docRef.update({
-      Pictures: FieldValue.arrayUnion(fileUrl),
-    });
+    let compressedFileUrl = "";
+    let uncompressedFileUrl = "";
+
+    await uploadBucket
+      .file(thumbFilePath)
+      .getSignedUrl({
+        action: "read",
+        expires: "03-09-2491",
+      })
+      .then((signedUrls) => {
+        // signedUrls[0] contains the file's public URL
+        compressedFileUrl = signedUrls[0];
+      });
+
+    await bucket
+      .file(uploadedFilePath)
+      .getSignedUrl({
+        action: "read",
+        expires: "03-09-2491",
+      })
+      .then((signedUrls) => {
+        // signedUrls[0] contains the file's public URL
+        uncompressedFileUrl = signedUrls[0];
+      });
+
+    console.log(`Compressed path: ${compressedFileUrl}`);
+    console.log(`Unnompressed path: ${uncompressedFileUrl}`);
+
+    // saving to Firestore DB
+    const db = getFirestore();
+    const data = {
+      compressedLink: compressedFileUrl,
+      unCompressedLink: uncompressedFileUrl,
+    };
+
+    await db
+      .collection(folderName)
+      .doc(fileName)
+      .set(data)
+      .then(() => console.log("Successfully added"))
+      .catch((err) => console.log(err));
 
     return fs.unlink(tempOutputFilePath, (err) => {
       if (err) throw err;
@@ -168,6 +199,8 @@ exports.imageUploadTrigger = functions.storage
     });
   });
 
+//TODO: check if the deleted file is in a subfolder
+// deletes thumbnail image from storage when image is deleted
 exports.imageDeleteTrigger = functions.storage
   .bucket("itsshubhaofficial.appspot.com")
   .object()
@@ -184,17 +217,21 @@ exports.imageDeleteTrigger = functions.storage
     console.log("FILE PATH: " + deletedFilePath);
     console.log("CONTENT TYPE: " + deletedFileContentType);
 
+    const splitFilePath = deletedFilePath.split("/");
+
+    const folderName = splitFilePath[0];
+    const deletedFileName = splitFilePath[1];
+
     const deleteFromBucket = admin
       .storage()
       .bucket("itsshubhaofficial-compressed");
 
-    const deletedFileName = path.basename(deletedFilePath);
     // Exit if the image is already a thumbnail.
     if (deletedFileName.startsWith("thumb_")) {
       return functions.logger.log("Already deleted.");
     }
 
-    const toDeleteFilePath = "thumb_" + deletedFilePath;
+    const toDeleteFilePath = `${folderName}/thumb_${deletedFileName}`;
     const toDeleteFileName = path.basename(toDeleteFilePath);
 
     console.log("DELETE: " + toDeleteFileName);
@@ -211,7 +248,27 @@ exports.imageDeleteTrigger = functions.storage
         throw err;
       });
 
-    // TODO: also delete from firestore
+    // TODO: delete from firestore
+    const db = getFirestore();
+    await db
+      .collection(folderName)
+      .doc(deletedFileName)
+      .delete()
+      .then(() => console.log("Successfully deleted"))
+      .catch((err) => console.log(err));
 
     return;
   });
+
+exports.returnDocs = functions.https.onRequest(async (req, res) => {
+  console.log(req.query);
+  let allImages = [];
+  cors(req, res, async () => {
+    const collectionRef = firestore.collection(req.query.folderName);
+    const snapshot = await collectionRef.get().catch((err) => console.log(err));
+    snapshot.docs.map((doc) => allImages.push(doc.data()));
+    console.log("allImages :>> ", allImages);
+
+    res.send(allImages);
+  });
+});

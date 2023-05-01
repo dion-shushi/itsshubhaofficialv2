@@ -13,7 +13,7 @@ function Footer() {
       </div>
       <div className="copyright_section">
         <p>
-          Copyright @ 2023 itsshubhaofficial <i className="far fa-copyright" />
+          <i className="far fa-copyright" /> 2023 itsshubhaofficial
         </p>
       </div>
     </div>

@@ -7,10 +7,15 @@
 } */
 
 
+.self-picture{
+  max-height: 40vh;
+  margin-bottom: 20px;;
+}
+
 .about-page{
   color: #dfdfdf;
-  margin-top: 100px;
-  height: 60vh;
+  margin-top: 50px;
+  height: fit-content;
 }
 
 .title {
@@ -21,23 +26,30 @@
   font-family: "Shippori Mincho B1", serif;
 }
 
-.about-text{
+.about-content{
   max-width: 40%;
   margin: auto;
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 50px;
   text-align: center;
   font-size: 18px;
-  height: 40vh;
+  height: fit-content;
+}
+
+.about-text{
+  /* background-color: rgb(104, 103, 103); */
+  background-color: rgba(0, 0, 0, 0.349);
+
+  padding: 20px;
+  border-radius: 10px;
 }
 
 @media screen and (max-width: 960px) {
   .about-page{
-    margin-top: 50px;
+    margin-top: 0px;
     margin-bottom: 40px;
   }
 
-  .about-text{
+  .about-content{
     max-width: 90%;
   }
 }

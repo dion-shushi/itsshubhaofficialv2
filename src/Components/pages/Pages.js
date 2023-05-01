@@ -1,175 +1,150 @@
-import { Component } from "react";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import "../../styling/Pages.css";
 import Modal from "react-modal";
 import Masonry from "react-masonry-css";
 import ArrowKeysReact from "arrow-keys-react";
-// import "react-lazy-load-image-component/src/effects/opacity.css";
 
-// TESTING
+import rightArrow from "../../Images/icons/right-arrow.png";
+import leftArrow from "../../Images/icons/left-arrow.png";
+import exit from "../../Images/icons/remove.png";
 
-import axios from "axios";
+export default function Pages(props) {
+  const [allImages, setAllImages] = useState([]);
 
-import { getDownloadURL, listAll } from "firebase/storage";
-
-class Pages extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalIsOpen: false,
-      currentIndex: 0,
-      currentImage: "",
-      scrollPosition: 0,
-      storageRef: this.props.storageRef,
-      listOfImages: [],
-      breakpointColumnsObj: {
-        default: 4,
-        1100: 3,
-        700: 2,
-        500: 1,
-      },
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        let response = await axios.get(
+          `https://us-central1-itsshubhaofficial.cloudfunctions.net/returnDocs`,
+          {
+            params: {
+              folderName: props.folderName,
+            },
+          }
+        );
+        console.log("response :>> ", response.data);
+        let data = response.data;
+        setAllImages([...allImages, ...data]);
+      } catch (err) {
+        console.error(err);
+      }
     };
+    fetchImages();
+  }, []);
 
-    this.modal = React.createRef();
+  return (
+    <>
+      {console.log("allImages :>> ", allImages)}
+      <PhotoRender allImages={allImages} title={props.title} />
+    </>
+  );
+}
 
-    ArrowKeysReact.config({
-      left: () => {
-        this.prevImg();
-      },
-      right: () => {
-        this.nextImg();
-      },
-    });
+function PhotoRender(props) {
+  const [modalIsOpen, setModalOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentImage, setCurrentImage] = useState("");
 
-    this.enlargeImage = this.enlargeImage.bind(this);
-    this.nextImg = this.nextImg.bind(this);
-    this.prevImg = this.prevImg.bind(this);
-    this.loadImages = this.loadImages.bind(this);
-  }
+  const modal = useRef(null);
 
-  componentDidMount() {
-    this.loadImages();
-    console.log(this.state.listOfImages);
-  }
-
-  openModal = () => {
-    this.setState({ modalIsOpen: true });
+  const breakpointColumnsObj = {
+    default: 4,
+    1100: 3,
+    700: 2,
+    500: 1,
   };
 
-  closeModal = () => {
-    this.setState({ modalIsOpen: false });
+  const openModal = () => {
+    setModalOpen(true);
   };
 
-  afterOpenModal = () => {
-    // document.getElementById(
-    //   "dynamic-modal"
-    // ).innerHTML = `<img class="modal-img" src=${
-    //   this.state.listOfImages[this.state.currentIndex]
-    // }/>`;
-    this.modal.current.focus();
+  const closeModal = () => {
+    setModalOpen(false);
   };
 
-  enlargeImage = (image, index) => {
-    this.setState({ currentImage: image.default, currentIndex: index });
-    this.openModal();
+  const afterOpenModal = () => {
+    modal.current.focus();
   };
 
-  nextImg = () => {
-    if (this.state.currentIndex < this.state.listOfImages.length - 1) {
-      this.setState({ currentIndex: this.state.currentIndex + 1 }, () => {
-        console.log(this.state.currentIndex);
-      });
-    } else this.setState({ currentIndex: 0 });
+  const enlargeImage = (index, photoSrc) => {
+    setCurrentIndex(index);
+    setCurrentImage(props.allImages[index]["unCompressedLink"]);
+    openModal();
   };
 
-  prevImg = () => {
-    if (this.state.currentIndex > 0)
-      this.setState({ currentIndex: this.state.currentIndex - 1 });
-    else
-      this.setState({
-        currentIndex: this.state.listOfImages.length - 1,
-      });
+  const nextImg = () => {
+    if (currentIndex < props.allImages.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+      setCurrentImage(props.allImages[currentIndex + 1]["unCompressedLink"]);
+    } else {
+      setCurrentIndex(0);
+      setCurrentImage(props.allImages[0]["unCompressedLink"]);
+    }
   };
 
-  loadImages = async () => {
-    //gets all the files from that folder
-    console.log("loadImages() function is being called");
-    await listAll(this.state.storageRef).then((res) => {
-      res.items.forEach((itemRef) => {
-        getDownloadURL(itemRef).then((url) => {
-          console.log(url);
-          this.setState({
-            listOfImages: [...this.state.listOfImages, url],
-          });
-        });
-      });
-    });
+  const prevImg = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+      setCurrentImage(props.allImages[currentIndex - 1]["unCompressedLink"]);
+    } else {
+      setCurrentIndex(props.allImages.length - 1);
+      setCurrentImage(
+        props.allImages[props.allImages.length - 1]["unCompressedLink"]
+      );
+    }
   };
 
-  render() {
-    // document.addEventListener("scroll", () => {
-    //   this.setState({ scrollPosition: document.documentElement.scrollTop });
-    // });
-
-    return (
+  return (
+    <>
       <div
         className="dynamic-img"
-        ref={this.modal}
+        ref={modal}
         {...ArrowKeysReact.events}
         tabIndex="1"
       >
         <Modal
           ariaHideApp={false}
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}
-          onAfterOpen={this.afterOpenModal}
+          isOpen={modalIsOpen}
+          onRequestClose={() => closeModal()}
+          onAfterOpen={() => afterOpenModal()}
           className="modal-class"
         >
+          <img src={exit} className="x-btn" onClick={() => closeModal()} />
           <img
-            src="https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/icons%2Fremove.png?alt=media&token=4673b7c0-25d9-4567-8520-a74bb7a03015"
-            className="x-btn"
-            onClick={this.closeModal}
-          />
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/icons%2Fright-arrow.png?alt=media&token=12a0aaae-4678-491a-94db-223d402e1549"
+            src={rightArrow}
             className="right-btn"
-            onClick={this.nextImg}
+            onClick={() => {
+              nextImg();
+            }}
           />
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/itsshubhaofficial.appspot.com/o/icons%2Fleft-arrow.png?alt=media&token=9f465127-5ae0-4504-bb29-27b1915c7760"
-            className="left-btn"
-            onClick={this.prevImg}
-          />
+          <img src={leftArrow} className="left-btn" onClick={() => prevImg()} />
           <div id="dynamic-modal">
-            <img
-              className="modal-img"
-              src={this.state.listOfImages[this.state.currentIndex]}
-            />
+            <img className="modal-img" src={currentImage} />
           </div>
         </Modal>
         <div id="title">
-          <p id="heading">{this.props.title}</p>
+          <p id="heading">{props.title}</p>
           <p id="sub-heading">PHOTOGRAPHY</p>
         </div>
         <div className="image-grid">
           <Masonry
-            breakpointCols={this.state.breakpointColumnsObj}
+            breakpointCols={breakpointColumnsObj}
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column"
           >
-            {this.state.listOfImages.map((image, index) => (
-              <img
-                onClick={() => this.enlargeImage(image, index)}
-                key={index}
-                src={image}
-                alt="info"
-              />
-            ))}
+            {props.allImages.map((photoSrc, index) => {
+              return (
+                <img
+                  src={photoSrc["compressedLink"]}
+                  key={index}
+                  onClick={() => enlargeImage(index, photoSrc)}
+                />
+              );
+            })}
           </Masonry>
         </div>
       </div>
-    );
-  }
+    </>
+  );
 }
-
-export default Pages;
