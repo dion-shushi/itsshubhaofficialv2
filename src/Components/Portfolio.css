@@ -45,13 +45,13 @@
 }
 
 .graduation {
-  background: url("../Images/graduation_coral.jpg")
+  background: url("../Images/graduation_coral.webp")
     center center/cover no-repeat;
   flex: 1;
 }
 
 .events {
-  background: url("../Images/events_50.jpg")
+  background: url("../Images/events_50.webp")
     center center/cover no-repeat;
   flex: 1;
 }
