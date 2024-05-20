@@ -38,3 +38,4 @@ firestore.indexes.json
 remoteconfig.template.json
 storage.rules
 firestore.rules
+firebase-debug.log

@@ -44,7 +44,7 @@ class Contact extends Component {
 
       //post request to server - sends mail
       var sendMail = await axios.post(
-        `http://127.0.0.1:5001/itsshubhaofficial/us-central1/sendMail`,
+        `https://us-central1-itsshubhaofficial.cloudfunctions.net/sendMail`,
         dataToSend
       );
 
