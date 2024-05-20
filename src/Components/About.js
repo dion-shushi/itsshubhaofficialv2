@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "../styling/About.css";
-import me from "../Images/self.jpg";
+import me from "../Images/self.webp";
 
 function About() {
   useEffect(() => {});
@@ -8,7 +8,7 @@ function About() {
   return (
     <div className="about-page">
       <div>
-        <h2 className="universal_font title">WHO IS SHUBHA JOSHI</h2>
+        <h2 className="universal_font title">WHO IS SHUBHA?</h2>
       </div>
       <div className="about-content">
         <img className="self-picture" src={me} />

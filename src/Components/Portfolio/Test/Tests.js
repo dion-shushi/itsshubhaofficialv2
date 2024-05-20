@@ -9,6 +9,8 @@ import rightArrow from "../../../Images/icons/right-arrow.png";
 import leftArrow from "../../../Images/icons/left-arrow.png";
 import exit from "../../../Images/icons/remove.png";
 
+// This class is for testing lazy loading
+
 export default function Test(props) {
   const [allImages, setAllImages] = useState([]);
 

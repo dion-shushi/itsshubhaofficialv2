@@ -32,22 +32,18 @@ let transporter = nodemailer.createTransport({
 });
 
 exports.sendMail = functions.https.onRequest((req, res) => {
-  var body = req.body;
-  var email_from = req.body.email;
-  var subject = req.body.subject;
-  var message = req.body.message;
+  var emailBody = req.body;
 
   cors(req, res, () => {
-    // getting dest email by query string
-    console.log(body);
-
     const mailOptions = {
-      from: email_from, // Something like: Jane Doe <janedoe@gmail.com>
+      from: emailBody.email,
       to: "shubha@itsshubhaofficial.com",
-      replyTo: email_from,
-      subject: subject, // email subject,
-      html: `<p>${req.body.firstname} ${req.body.lastname} sent a message!</p><br/><p>${message}</p>`,
+      replyTo: emailBody.email,
+      subject: emailBody.subject,
+      html: `<p>${emailBody.firstname} ${emailBody.lastname} sent a message!</p><br/><p>${emailBody.message}</p>`,
     };
+
+    console.log(mailOptions);
 
     // returning result
     return transporter.sendMail(mailOptions, (erro, info) => {

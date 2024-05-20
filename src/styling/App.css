@@ -14,7 +14,7 @@
 }
 
 .whole-page {
-  background: url("../Images/background.jpg")
+  background: url("../Images/background.webp")
     no-repeat center center fixed;
     /* background-color: #0E0301; */
   -webkit-background-size: cover;
