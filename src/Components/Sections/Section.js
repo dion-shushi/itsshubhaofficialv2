@@ -8,6 +8,9 @@ import ArrowKeysReact from "arrow-keys-react";
 import "../../styling/Section.css";
 import "../../styling/Pages.css";
 
+// This class is used to render each prodcut section
+// Check Components/Products.js
+
 function Section(props) {
   const [compressedImages, setCompImages] = useState([]);
   const [unCompressedImages, setUnCompImages] = useState([]);
@@ -154,7 +157,6 @@ function Section(props) {
             )}
           </div>
 
-          {/* <img className="sectionImage" src={props.image} alt="" /> */}
           <div className="textSection">
             <div className="text">
               <p className="sectionTitle">{props.title}</p>
